@@ -2,7 +2,7 @@ using UnityEngine;
 using static UnityEngine.Screen;
 
 
-namespace W3.Tambola.Utils
+namespace UNO.utiles
 {
     public class SafeAreaHelper : MonoBehaviour
     {

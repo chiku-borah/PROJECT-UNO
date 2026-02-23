@@ -1,0 +1,16 @@
+{
+    "name": "UNO.scriptables",
+    "rootNamespace": "UNO.scriptables",
+    "references": [
+        "GUID:22096b0b90d2a9d4b926a518d9b4cb84"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

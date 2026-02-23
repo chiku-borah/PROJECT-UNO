@@ -1,0 +1,18 @@
+{
+    "name": "UNO.core",
+    "rootNamespace": "UNO.core",
+    "references": [
+        "GUID:b9e8082f35835104cbee72732c988c8e",
+        "GUID:22096b0b90d2a9d4b926a518d9b4cb84",
+        "GUID:76bf1e76a8d9f794f9e70edd03843f84"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
