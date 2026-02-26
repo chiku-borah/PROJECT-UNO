@@ -23,14 +23,12 @@ namespace UNO.enums
 
         public enum GameState
         {
-            WaitingForPlayers = 0,
-            DealingCards = 1,
-            PlayerTurn = 2,
-            ResolvingCardEffect = 3,
-            NextTurn = 4,
-            GameOver = 5
+            Setup,
+            PlayerTurn,
+            ResolvingEffect,
+            Drawing,
+            GameOver
         }
-
         public enum GameDirection
         {
             Clockwise = 1,
