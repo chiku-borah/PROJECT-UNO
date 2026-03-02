@@ -16,4 +16,4 @@ MonoBehaviour:
   cardType: 0
   cardColor: 3
   numberValue: 2
-  cardFrontSprite: {fileID: 0}
+  cardFrontSprite: {fileID: -3569859473684679815, guid: fa225d1f7e9f6254c873b84d934d2621, type: 3}

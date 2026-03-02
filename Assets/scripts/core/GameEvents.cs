@@ -30,5 +30,12 @@ namespace UNO.core
             OnPlayerPlayCard?.Invoke(playerID, _card);
         }
 
+        public Action<Player,CardData> OnClickedCard = delegate { };
+
+        public void OnTriggerClickedCard(Player player,CardData card)
+        {
+            OnClickedCard?.Invoke(player, card);
+        }
+
     }
 }

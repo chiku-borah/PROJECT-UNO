@@ -10,7 +10,7 @@ namespace UNO.core
     {
         [Header("References")]
         [SerializeField] private DeckManager _deck;
-        [SerializeField] private List<CardData> _allCardAssets;
+        [SerializeField] private CardDatabase _allCardAssets;
         [SerializeField] private List<Player> _players;
 
         private RuleHandler _ruleHandler;
@@ -40,7 +40,7 @@ namespace UNO.core
         {
             _currentState = GameState.Setup;
 
-            _deck.Initialize(_allCardAssets);
+            _deck.Initialize(_allCardAssets.allCards);
             DealCards(7);
 
             CardData firstCard = _deck.DrawCard();
@@ -75,7 +75,7 @@ namespace UNO.core
 
             CardData topCard = _deck.GetTopDiscard();
 
-            if (!_ruleHandler.IsValidMove( , topCard))
+            if (!_ruleHandler.IsValidMove(card , topCard))
             {
                 Debug.Log("Invalid Move");
                 return;
