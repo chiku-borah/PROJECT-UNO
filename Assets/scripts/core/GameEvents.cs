@@ -37,5 +37,22 @@ namespace UNO.core
             OnClickedCard?.Invoke(player, card);
         }
 
+
+
+        public Action<Player> OnPlayerPlayWild= delegate{};
+
+        public void TriggerPlayerPlayWild(Player player)
+        {
+            OnPlayerPlayWild?.Invoke(player);
+        }
+
+
+        public Action<Enums.CardColor> OnWildColorSelected = delegate { };
+
+        public void TriggerWildColorSelected(Enums.CardColor color)
+        {
+            OnWildColorSelected?.Invoke(color);
+        }
+
     }
 }

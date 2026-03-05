@@ -3,7 +3,8 @@ using UnityEngine;
 using UNO.scriptables;
 using UNO.enums;
 using static UNO.enums.Enums;
-
+using UNO.utiles;
+using System;
 namespace UNO.core
 {
     public class GameManager : MonoBehaviour
@@ -19,7 +20,11 @@ namespace UNO.core
         private int _direction = 1;
 
         private GameState _currentState;
+        private CardColor _activeColor;
 
+
+        //Bools
+        private bool _isWildColorSelected = true;
         // ======================================
         // UNITY
         // ======================================
@@ -31,6 +36,13 @@ namespace UNO.core
         private void Start()
         {
             StartGame();
+
+            GameEvents.Instance.OnWildColorSelected += OnWildSelected;
+        }
+
+        private void OnWildSelected(CardColor color)
+        {
+            _isWildColorSelected = true;
         }
 
         // ======================================
@@ -73,22 +85,24 @@ namespace UNO.core
             if (!IsCurrentPlayer(player))
                 return;
 
-            CardData topCard = _deck.GetTopDiscard();
+            if (!_isWildColorSelected) return;
 
-            if (!_ruleHandler.IsValidMove(card , topCard))
+            CardData topCard = _deck.GetTopDiscard();
+            GameConstants.ActiveColor = topCard.cardColor;
+            if (!_ruleHandler.IsValidMove(card, topCard, _activeColor))
             {
                 Debug.Log("Invalid Move");
                 return;
             }
 
-            _currentState = GameState.ResolvingEffect;
 
+
+            _currentState = GameState.ResolvingEffect;
             player.RemoveCard(card);
             _deck.AddToDiscard(card);
-
             CardEffectResult effect = _ruleHandler.EvaluateEffect(card);
             HandleEffect(effect);
-
+            HandleDrawIfCannotStack(player);
             if (player.CardCount() == 0)
             {
                 _currentState = GameState.GameOver;
@@ -110,6 +124,15 @@ namespace UNO.core
 
             if (effect.SkipNextPlayer)
                 MoveToNextPlayer();
+
+            if (effect.ColorWild)
+            {
+                _isWildColorSelected = false;
+                GameEvents.Instance.TriggerPlayerPlayWild(GetCurrentPlayer());
+                return;
+            }
+
+
         }
 
         // ======================================
@@ -133,7 +156,7 @@ namespace UNO.core
             }
 
             _currentState = GameState.PlayerTurn;
-            MoveToNextPlayer();
+            // MoveToNextPlayer();
         }
 
         // ======================================
@@ -166,5 +189,12 @@ namespace UNO.core
         {
             return _currentState;
         }
+
+
+        private void OnDestroy()
+        {
+            GameEvents.Instance.OnWildColorSelected -= OnWildSelected;
+        }
     }
+
 }

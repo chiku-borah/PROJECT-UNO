@@ -6,7 +6,7 @@ namespace UNO.core
 {
     public class Player : MonoBehaviour
     {
-        public int PlayerId { get; private set; }
+        public string PlayerId { get; private set; }
         public string PlayerName { get; private set; }
 
         public PlayerState State { get; private set; }
@@ -17,7 +17,7 @@ namespace UNO.core
         // ===============================
         // INITIALIZE (instead of constructor)
         // ===============================
-        public void Initialize(int id, string name)
+        public void Initialize(string id, string name)
         {
             PlayerId = id;
             PlayerName = name;

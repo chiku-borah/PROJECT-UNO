@@ -1,7 +1,11 @@
 {
     "name": "UNO.utiles",
     "rootNamespace": "UNO.utiles",
-    "references": [],
+    "references": [
+        "GUID:22096b0b90d2a9d4b926a518d9b4cb84",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:002175b51faf9ad41981ff11399cea04"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

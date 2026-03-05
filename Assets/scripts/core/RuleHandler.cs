@@ -13,7 +13,8 @@ namespace UNO.core
         // =========================
         // VALID MOVE CHECK
         // =========================
-        public bool IsValidMove(CardData playedCard, CardData topCard)
+
+        public bool IsValidMove(CardData playedCard, CardData topCard , CardColor activeColor)
         {
             // If stacking active → only same draw type allowed
             if (IsStackingActive)
@@ -27,7 +28,7 @@ namespace UNO.core
                 return true;
 
             // Match color
-            if (playedCard.cardColor == topCard.cardColor)
+            if (playedCard.cardColor == activeColor)
                 return true;
 
             // Match number (only if both are number cards)
@@ -52,6 +53,10 @@ namespace UNO.core
 
             switch (card.cardType)
             {
+
+                case CardType.Wild:
+                    result.ColorWild = true;
+                    break;
                 case CardType.Skip:
                     result.SkipNextPlayer = true;
                     break;
@@ -71,6 +76,7 @@ namespace UNO.core
                     _stackingType = CardType.WildDrawFour;
                     result.IsStackingActive = true;
                     break;
+
             }
 
             return result;

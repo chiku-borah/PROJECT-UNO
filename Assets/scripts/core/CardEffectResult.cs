@@ -8,5 +8,6 @@ namespace UNO.core
         public bool ReverseDirection;
         public int DrawCards;
         public bool IsStackingActive;
+        public bool ColorWild;
     }
 }
