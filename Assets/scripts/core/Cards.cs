@@ -3,7 +3,7 @@ using UNO.scriptables;
 using UnityEngine.UI;
 namespace UNO.core
 {
-    public class Crads : MonoBehaviour
+    public class Cards : MonoBehaviour
     {
         
         [SerializeField] Image _image;

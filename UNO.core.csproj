@@ -64,13 +64,13 @@
     <Compile Include="Assets\scripts\core\Player.cs" />
     <Compile Include="Assets\scripts\core\PlayerState.cs" />
     <Compile Include="Assets\scripts\core\DeckManager.cs" />
-    <Compile Include="Assets\scripts\core\Crads.cs" />
     <Compile Include="Assets\scripts\core\GameEvents.cs" />
     <Compile Include="Assets\scripts\core\WildCardSelectionHandler.cs" />
     <Compile Include="Assets\scripts\core\GameManager.cs" />
     <Compile Include="Assets\scripts\core\CardEffectResult.cs" />
     <Compile Include="Assets\scripts\core\RuleHandler.cs" />
     <Compile Include="Assets\scripts\core\UIManager.cs" />
+    <Compile Include="Assets\scripts\core\Cards.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\scripts\core\UNO.core.asmdef" />
@@ -552,6 +552,10 @@
       <HintPath>Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Lib\Editor\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="DOTweenEditor">
+      <HintPath>Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Lib\Editor\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
@@ -564,16 +568,12 @@
       <HintPath>Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Lib\Editor\unityplastic.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@d6f9955a5d5f\Mono.Cecil.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DOTweenEditor">
-      <HintPath>Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@d6f9955a5d5f\Mono.Cecil.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">

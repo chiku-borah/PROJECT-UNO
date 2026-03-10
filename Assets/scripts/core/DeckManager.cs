@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UNO.scriptables;
+using static UNO.enums.Enums;
 
 namespace UNO.core
 {
     public class DeckManager : MonoBehaviour
     {
+        [SerializeField] Cards _cardPrefab;
         public int DrawCount => _drawPile.Count;
         public int DiscardCount => _discardPile.Count;
 
@@ -30,6 +32,8 @@ namespace UNO.core
         // ======================================
         // BUILD DECK (You control duplicates here)
         // ======================================
+
+        GameObject _obj;
         private List<CardData> BuildDeck(List<CardData> cardAssets)
         {
             // IMPORTANT:
@@ -37,7 +41,48 @@ namespace UNO.core
             // this is enough.
             // If not, duplicate them here manually.
 
-            return new List<CardData>(cardAssets);
+
+            foreach (var data in cardAssets)
+            {
+                _obj = Instantiate(_cardPrefab.gameObject, this.transform);
+                _obj.GetComponent<Cards>().Initialize(data);
+                _obj.SetActive(false);
+                _obj.name = GetShortCardName(data);
+            }
+                return new List<CardData>(cardAssets);
+        }
+
+        private string GetShortCardName(CardData data)
+        {
+            string color = data.cardColor.ToString()[0].ToString(); // R,G,B,Y
+            string type = "";
+
+            switch (data.cardType)
+            {
+                case CardType.Number:
+                    type = data.numberValue.ToString();
+                    break;
+
+                case CardType.Skip:
+                    type = "S";
+                    break;
+
+                case CardType.Reverse:
+                    type = "R";
+                    break;
+
+                case CardType.DrawTwo:
+                    type = "+2";
+                    break;
+
+                case CardType.Wild:
+                    return "W";
+
+                case CardType.WildDrawFour:
+                    return "W+4";
+            }
+
+            return $"{color}_{type}";
         }
 
         // ======================================
