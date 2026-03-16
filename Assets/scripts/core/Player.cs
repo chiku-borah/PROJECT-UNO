@@ -11,8 +11,10 @@ namespace UNO.core
 
         public PlayerState State { get; private set; }
 
-        private List<CardData> _hand = new List<CardData>();
-        public IReadOnlyList<CardData> Hand => _hand;
+        public List<Cards> HandCards => _hand;
+
+        private List<Cards> _hand = new List<Cards>();
+        public IReadOnlyList<Cards> Hand => _hand;
 
         // ===============================
         // INITIALIZE (instead of constructor)
@@ -25,12 +27,12 @@ namespace UNO.core
         }
 
 
-        public void AddCard(CardData card)
+        public void AddCard(Cards card)
         {
             _hand.Add(card);
         }
 
-        public void RemoveCard(CardData card)
+        public void RemoveCard(Cards card)
         {
             _hand.Remove(card);
         }
@@ -47,7 +49,7 @@ namespace UNO.core
         {
             for (int i = 0; i < amount; i++)
             {
-                CardData drawnCard = deck.DrawCard();
+                Cards drawnCard = deck.DrawCard();
 
                 if (drawnCard != null)
                 {

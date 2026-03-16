@@ -71,6 +71,7 @@
     <Compile Include="Assets\scripts\core\RuleHandler.cs" />
     <Compile Include="Assets\scripts\core\UIManager.cs" />
     <Compile Include="Assets\scripts\core\Cards.cs" />
+    <Compile Include="Assets\scripts\core\PlayerCardViewHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\scripts\core\UNO.core.asmdef" />

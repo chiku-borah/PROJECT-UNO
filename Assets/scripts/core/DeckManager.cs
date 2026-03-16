@@ -11,8 +11,8 @@ namespace UNO.core
         public int DrawCount => _drawPile.Count;
         public int DiscardCount => _discardPile.Count;
 
-        private Stack<CardData> _drawPile = new Stack<CardData>();
-        private Stack<CardData> _discardPile = new Stack<CardData>();
+        private Stack<Cards> _drawPile = new Stack<Cards>();
+        private Stack<Cards> _discardPile = new Stack<Cards>();
 
         // ======================================
         // INITIALIZE DECK
@@ -22,7 +22,7 @@ namespace UNO.core
             _drawPile.Clear();
             _discardPile.Clear();
 
-            List<CardData> fullDeck = BuildDeck(cardAssets);
+            List<Cards> fullDeck = BuildDeck(cardAssets);
             Shuffle(fullDeck);
 
             foreach (var card in fullDeck)
@@ -34,22 +34,24 @@ namespace UNO.core
         // ======================================
 
         GameObject _obj;
-        private List<CardData> BuildDeck(List<CardData> cardAssets)
+        private List<Cards> BuildDeck(List<CardData> cardAssets)
         {
             // IMPORTANT:
             // If your ScriptableObjects already contain duplicates,
             // this is enough.
             // If not, duplicate them here manually.
 
-
+             List<Cards> _cards = new List<Cards>();
             foreach (var data in cardAssets)
             {
                 _obj = Instantiate(_cardPrefab.gameObject, this.transform);
-                _obj.GetComponent<Cards>().Initialize(data);
+                Cards c = _obj.GetComponent<Cards>();
+                c.Initialize(data);
                 _obj.SetActive(false);
                 _obj.name = GetShortCardName(data);
+                _cards.Add(c);
             }
-                return new List<CardData>(cardAssets);
+                return _cards;
         }
 
         private string GetShortCardName(CardData data)
@@ -88,7 +90,7 @@ namespace UNO.core
         // ======================================
         // SHUFFLE
         // ======================================
-        private void Shuffle(List<CardData> cards)
+        private void Shuffle(List<Cards> cards)
         {
             for (int i = 0; i < cards.Count; i++)
             {
@@ -101,7 +103,7 @@ namespace UNO.core
         // ======================================
         // DRAW CARD
         // ======================================
-        public CardData DrawCard()
+        public Cards DrawCard()
         {
             if (_drawPile.Count == 0)
                 ReshuffleFromDiscard();
@@ -115,14 +117,14 @@ namespace UNO.core
         // ======================================
         // DISCARD
         // ======================================
-        public void AddToDiscard(CardData card)
+        public void AddToDiscard(Cards card)
         {
             if (card == null) return;
 
             _discardPile.Push(card);
         }
 
-        public CardData GetTopDiscard()
+        public Cards GetTopDiscard()
         {
             if (_discardPile.Count == 0)
                 return null;
@@ -138,9 +140,9 @@ namespace UNO.core
             if (_discardPile.Count <= 1)
                 return;
 
-            CardData topCard = _discardPile.Pop();
+            Cards topCard = _discardPile.Pop();
 
-            List<CardData> temp = new List<CardData>(_discardPile);
+            List<Cards> temp = new List<Cards>(_discardPile);
             _discardPile.Clear();
 
             Shuffle(temp);

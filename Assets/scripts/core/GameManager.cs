@@ -54,8 +54,7 @@ namespace UNO.core
 
             _deck.Initialize(_allCardAssets.allCards);
             DealCards(7);
-
-            CardData firstCard = _deck.DrawCard();
+            Cards firstCard = _deck.DrawCard();
             _deck.AddToDiscard(firstCard);
 
             _currentState = GameState.PlayerTurn;
@@ -77,7 +76,7 @@ namespace UNO.core
         // ======================================
         // PLAY CARD
         // ======================================
-        public void TryPlayCard(Player player, CardData card)
+        public void TryPlayCard(Player player, Cards card)
         {
             if (_currentState != GameState.PlayerTurn)
                 return;
@@ -87,9 +86,9 @@ namespace UNO.core
 
             if (!_isWildColorSelected) return;
 
-            CardData topCard = _deck.GetTopDiscard();
-            GameConstants.ActiveColor = topCard.cardColor;
-            if (!_ruleHandler.IsValidMove(card, topCard, _activeColor))
+            Cards topCard = _deck.GetTopDiscard();
+            GameConstants.ActiveColor = topCard.CardData.cardColor;
+            if (!_ruleHandler.IsValidMove(card.CardData, topCard.CardData, _activeColor))
             {
                 Debug.Log("Invalid Move");
                 return;
@@ -100,7 +99,7 @@ namespace UNO.core
             _currentState = GameState.ResolvingEffect;
             player.RemoveCard(card);
             _deck.AddToDiscard(card);
-            CardEffectResult effect = _ruleHandler.EvaluateEffect(card);
+            CardEffectResult effect = _ruleHandler.EvaluateEffect(card.CardData);
             HandleEffect(effect);
             HandleDrawIfCannotStack(player);
             if (player.CardCount() == 0)
